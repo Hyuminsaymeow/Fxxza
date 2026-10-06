@@ -1,12 +1,154 @@
---[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.9) ~  Much Love, Ferib 
+_G.ENABLED = not _G.ENABLED
+print("Enabled:", _G.ENABLED)
 
-]]--
+local Players = game:GetService("Players")
+local Lighting = game:GetService("Lighting")
+local VIM = game:GetService("VirtualInputManager")
 
-_G.ENABLED= not _G.ENABLED;print("Enabled:",_G.ENABLED);local v0=game:GetService("Players");local v1=game:GetService("Lighting");local v2=game:GetService("VirtualInputManager");local v3=v0.LocalPlayer;local v4=v3:WaitForChild("PlayerGui");local v5=v4:FindFirstChild("NorseHubUI");if v5 then v5:Destroy();end local v6=v1:FindFirstChild("NorseHubBlur");if v6 then v6:Destroy();end local v7=Instance.new("ScreenGui");v7.Name="NorseHubUI";v7.ResetOnSpawn=false;v7.IgnoreGuiInset=true;v7.DisplayOrder=1000618 -(555 + 64) ;v7.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;v7.Parent=v4;local v15=Instance.new("BlurEffect");v15.Name="NorseHubBlur";v15.Size=941 -(857 + 74) ;v15.Parent=v1;local v19=Instance.new("Frame");v19.Size=UDim2.new(0,988 -(367 + 201) ,927 -(214 + 713) ,33 + 97 );v19.Position=UDim2.new(0.5 + 0 ,0,0.5,877 -(282 + 595) );v19.AnchorPoint=Vector2.new(1637.5 -(1523 + 114) ,0.5);v19.BackgroundColor3=Color3.fromRGB(15,14 + 1 ,20 -5 );v19.BackgroundTransparency=0.15;v19.BorderSizePixel=1065 -(68 + 997) ;v19.ZIndex=1280 -(226 + 1044) ;v19.Parent=v7;local v28=Instance.new("UICorner");v28.CornerRadius=UDim.new(0,65 -50 );v28.Parent=v19;local v31=Instance.new("TextLabel");v31.Size=UDim2.new(118 -(32 + 85) ,0,0 + 0 ,16 + 54 );v31.Position=UDim2.new(0,957 -(892 + 65) ,0,23 -13 );v31.BackgroundTransparency=1;v31.Text="Norse Hub";v31.TextColor3=Color3.fromRGB(471 -216 ,467 -212 ,255);v31.TextSize=392 -(87 + 263) ;v31.Font=Enum.Font.GothamBold;v31.ZIndex=191 -(67 + 113) ;v31.Parent=v19;local v42=Instance.new("TextLabel");v42.Size=UDim2.new(1,0,0,22 + 8 );v42.Position=UDim2.new(0 -0 ,0 + 0 ,0 -0 ,1034 -(802 + 150) );v42.BackgroundTransparency=1;v42.Text="Auto Farm : ON";v42.TextColor3=Color3.fromRGB(269 -169 ,255,100);v42.TextSize=32 -14 ;v42.Font=Enum.Font.Gotham;v42.ZIndex=9 + 2 ;v42.Parent=v19;local v53={};v53.autoFarm=function(v55) while _G.ENABLED do local v56=v3.Character or v3.CharacterAdded:Wait() ;local v57=v56:FindFirstChild("HumanoidRootPart");if  not v57 then local v60=997 -(915 + 82) ;while true do if (v60==(0 -0)) then task.wait(1 + 0 );continue;break;end end end for v58,v59 in pairs(workspace:GetChildren()) do if  not _G.ENABLED then break;end if ((v59.Name=="Thug,") or (v59.Name=="Strong Thug") or (v59.Name=="king of the Thugs") or (v59.Name=="Evil Vampire") or (v59.Name=="Slightly More Eviler Vampire") or (v59.Name=="Vampire Capo")) then local v61=0 -0 ;local v62;local v63;while true do if (v61==(1187 -(1069 + 118))) then v62=v59:FindFirstChildOfClass("Humanoid");v63=v59:FindFirstChild("HumanoidRootPart");v61=2 -1 ;end if (v61==(1 -0)) then if (v62 and v63) then repeat task.wait();v56=v3.Character;if  not v56 then break;end v57=v56:FindFirstChild("HumanoidRootPart");if  not v57 then break;end v57.CFrame=v63.CFrame * CFrame.new(0 + 0 ,0,15 -6 ) ;v2:SendMouseButtonEvent(500,300,0 + 0 ,true,game,0);task.wait(791.05 -(368 + 423) );v2:SendMouseButtonEvent(1571 -1071 ,300,0,false,game,18 -(10 + 8) );until  not _G.ENABLED or  not v59.Parent or  not v62.Parent or (v62.Health<=(0 -0))  end break;end end end end task.wait();end end;task.spawn(function() v53:autoFarm();end);
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+-- =========================
+-- NORSE HUB UI
+-- =========================
+
+local oldGui = PlayerGui:FindFirstChild("NorseHubUI")
+if oldGui then
+    oldGui:Destroy()
+end
+
+local oldBlur = Lighting:FindFirstChild("NorseHubBlur")
+if oldBlur then
+    oldBlur:Destroy()
+end
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "NorseHubUI"
+gui.ResetOnSpawn = false
+gui.IgnoreGuiInset = true
+gui.DisplayOrder = 999999
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Parent = PlayerGui
+
+local blur = Instance.new("BlurEffect")
+blur.Name = "NorseHubBlur"
+blur.Size = 10
+blur.Parent = Lighting
+
+local box = Instance.new("Frame")
+box.Size = UDim2.new(0, 420, 0, 130)
+box.Position = UDim2.new(0.5, 0, 0.5, 0)
+box.AnchorPoint = Vector2.new(0.5, 0.5)
+box.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+box.BackgroundTransparency = 0.15
+box.BorderSizePixel = 0
+box.ZIndex = 10
+box.Parent = gui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 15)
+corner.Parent = box
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 70)
+title.Position = UDim2.new(0, 0, 0, 10)
+title.BackgroundTransparency = 1
+title.Text = "Norse Hub"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = 42
+title.Font = Enum.Font.GothamBold
+title.ZIndex = 11
+title.Parent = box
+
+local status = Instance.new("TextLabel")
+status.Size = UDim2.new(1, 0, 0, 30)
+status.Position = UDim2.new(0, 0, 0, 82)
+status.BackgroundTransparency = 1
+status.Text = "Auto Farm : ON"
+status.TextColor3 = Color3.fromRGB(100, 255, 100)
+status.TextSize = 18
+status.Font = Enum.Font.Gotham
+status.ZIndex = 11
+status.Parent = box
+
+-- =========================
+-- AUTO FARM
+-- =========================
+
+local Collection = {}
+
+function Collection:autoFarm()
+
+    while _G.ENABLED do
+
+        local character = LocalPlayer.Character
+            or LocalPlayer.CharacterAdded:Wait()
+
+        local hrp = character:FindFirstChild("HumanoidRootPart")
+
+        if not hrp then
+            task.wait(1)
+            continue
+        end
+
+        for _, v in pairs(workspace:GetChildren()) do
+
+            if not _G.ENABLED then
+                break
+            end
+
+            if v.Name == "Thug,"
+            or v.Name == "Strong Thug"
+            or v.Name == "king of the Thugs"
+            or v.Name == "Evil Vampire"
+            or v.Name == "Slightly More Eviler Vampire"
+            or v.Name == "Vampire Capo" then
+
+                local enemyHumanoid = v:FindFirstChildOfClass("Humanoid")
+                local enemyHRP = v:FindFirstChild("HumanoidRootPart")
+
+                if enemyHumanoid and enemyHRP then
+
+                    repeat
+                        task.wait()
+
+                        character = LocalPlayer.Character
+
+                        if not character then
+                            break
+                        end
+
+                        hrp = character:FindFirstChild("HumanoidRootPart")
+
+                        if not hrp then
+                            break
+                        end
+
+                        hrp.CFrame =
+                            enemyHRP.CFrame * CFrame.new(0, 0, 9)
+
+                        VIM:SendMouseButtonEvent(
+                            500, 300, 0, true, game, 0
+                        )
+
+                        task.wait(0.05)
+
+                        VIM:SendMouseButtonEvent(
+                            500, 300, 0, false, game, 0
+                        )
+
+                    until not _G.ENABLED
+                        or not v.Parent
+                        or not enemyHumanoid.Parent
+                        or enemyHumanoid.Health <= 0
+                end
+            end
+        end
+
+        task.wait()
+    end
+end
+
+task.spawn(function()
+    Collection:autoFarm()
+end)
